@@ -35,9 +35,9 @@ ReactDOM.render(
 		<Router history={browserHistory}>
 			<Route path="/" component={App} >
 				<IndexRoute onEnter={checkIndexAuthorization(store)} />
-				<Route onEnter={checkWidgetAuthorization(store, 'login')} path="/login" component={Login} /> 
-				<Route onEnter={checkWidgetAuthorization(store, 'signup')} path="/signup" component={Signup} />
-				<Route onEnter={checkWidgetAuthorization(store)} path="/manage" component={Manage} />
+				<Route onEnter={checkWidgetAuthorization('login')} path="/login" component={Login} /> 
+				<Route onEnter={checkWidgetAuthorization('signup')} path="/signup" component={Signup} />
+				<Route onEnter={checkWidgetAuthorization('manage')} path="/manage" component={Manage} />
 			</Route>
 		</Router>
 	</Provider>,

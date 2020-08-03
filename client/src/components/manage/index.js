@@ -1,6 +1,5 @@
 import React, { Component } from 'react'  
-import PropTypes from 'prop-types'
-import { reduxForm, Field } from 'redux-form'  
+import { reduxForm } from 'redux-form'  
 import { connect } from 'react-redux'
 
 import { studentListing } from './actions'
@@ -21,7 +20,7 @@ class Manage extends Component {
 	//   }).isRequired,
 	// }
 
-	componentDidMount(){
+	componentDidMount (){
 		
 		fetch('/api/auth/check', {
 			method: 'POST',

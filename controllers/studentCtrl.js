@@ -10,7 +10,7 @@ const StudentCtrl = {
 				sort: { createdAt: -1 },
 			},
 			(err, records) => {
-				if (err) res.status(500).json({ err })
+				if (err) res.status(404).json({ err })
 				res.status(200).json(records)
 			}
 		)
@@ -21,7 +21,7 @@ const StudentCtrl = {
 		studentModel.findOne(
 			{ _id: id },
 			(err, records) => {
-				if (err) res.status(500).json({ err })
+				if (err) res.status(404).json({ err })
 				res.status(200).json(records)
 			}
 		)

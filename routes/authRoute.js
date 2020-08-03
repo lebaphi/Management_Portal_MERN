@@ -4,7 +4,7 @@ import AuthCtrl from '../controllers/authCtrl'
 
 const router = Router()
 
-function authMDW() {
+function authMDW () {
 	return [
 		body('token').escape(), 
 	]

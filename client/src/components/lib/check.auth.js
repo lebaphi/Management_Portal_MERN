@@ -1,5 +1,5 @@
 
-function checkAuthorization (dispatch) {  
+function checkAuthorization () {  
 
 	const storedToken = localStorage.getItem('token')
 	if (storedToken) {
@@ -29,10 +29,10 @@ export function checkIndexAuthorization ({ dispatch }) {
 	}
 }
 
-export function checkWidgetAuthorization ({ dispatch }, route) {  
+export function checkWidgetAuthorization (route) {  
 
 	return (_, replace, next) => {
-		if (checkAuthorization(dispatch)){
+		if (checkAuthorization()){
 			if ([ 'login', 'signup' ].includes(route)) replace('manage')
 			return next()
 		}

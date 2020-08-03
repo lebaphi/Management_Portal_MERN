@@ -28,7 +28,7 @@ app.use(session({
 	saveUninitialized: true
 }))
 
-token('id', function getId(req) {
+token('id', function getId (req) {
 	return req.id
 })
 
@@ -56,6 +56,6 @@ app.listen(8080, () => {
 })
 
 process.on('SIGINT', () => {
-	Database.disconnectDB()
+	database.disconnectDB()
 	process.exit(0)
 })
