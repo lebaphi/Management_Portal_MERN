@@ -26,8 +26,6 @@ const reducer = function widgetReducer (state = initialState, action) {
 			errors: [],
 		}
 
-		// On success include the new widget into our list
-		// We'll render this list later.
 	case WIDGET_CREATE_SUCCESS:
 		return {
 			list: state.list.concat([ action.widget ]),

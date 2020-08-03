@@ -4,12 +4,6 @@ import userCtrl from '../controllers/userCtrl'
 
 const router = Router()
 
-function getUserByIdMDW(){
-	return [
-		body('id').escape()
-	]
-}
-
 function signUpMDW() {
 	return [
 		body('email').isEmail().normalizeEmail().escape(), 
@@ -18,7 +12,7 @@ function signUpMDW() {
 }
 
 router.get('/', userCtrl.getAllUsers)
-router.get('/:id', getUserByIdMDW(), userCtrl.getUserById)
 router.post('/signup', signUpMDW(), userCtrl.createUser)
+router.post('/login', signUpMDW(), userCtrl.login)
 
 export default router

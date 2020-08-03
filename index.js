@@ -1,5 +1,6 @@
 require('dotenv').config()
 import express from 'express'
+import session from 'express-session'
 const app = express()
 const addRequestId = require('express-request-id')()
 import { join } from 'path'
@@ -8,14 +9,24 @@ import { json, urlencoded } from 'body-parser'
 import methodOverride from 'method-override'
 import { createWriteStream } from 'fs'
 import routes from './routes'
-import Database from './database/database'
+import database from './database/database'
+import config from './config/config'
 
-Database.connectDB()
+database.connectDB()
 
 app.use(addRequestId)
 app.use(methodOverride('_method'))
 app.use(json())
 app.use(urlencoded({ extended: true }))
+
+app.set('trust proxy', 1)
+app.use(session({
+	name : 'local.session',
+	secret: config.secretKey,
+	resave: true,
+	store: new session.MemoryStore(),
+	saveUninitialized: true
+}))
 
 token('id', function getId(req) {
 	return req.id

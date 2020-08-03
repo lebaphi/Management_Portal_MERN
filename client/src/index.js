@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga'
 import App from './App'
 import Login from './components/login'
 import Signup from './components/signup'
-import Widgets from './components/widgets'
+import Manage from './components/manage'
 import IndexReducer from './index.reducer'
 import IndexSagas from './index.saga'
 import * as serviceWorker from './serviceWorker'
@@ -35,9 +35,9 @@ ReactDOM.render(
 		<Router history={browserHistory}>
 			<Route path="/" component={App} >
 				<IndexRoute onEnter={checkIndexAuthorization(store)} />
-				<Route path="/login" component={Login} /> 
-				<Route path="/signup" component={Signup} />
-				<Route onEnter={checkWidgetAuthorization(store)} path="/widgets" component={Widgets} />
+				<Route onEnter={checkWidgetAuthorization(store, 'login')} path="/login" component={Login} /> 
+				<Route onEnter={checkWidgetAuthorization(store, 'signup')} path="/signup" component={Signup} />
+				<Route onEnter={checkWidgetAuthorization(store)} path="/manage" component={Manage} />
 			</Route>
 		</Router>
 	</Provider>,

@@ -8,7 +8,6 @@ import Errors from '../notification/error'
 
 import { widgetCreate } from './actions'
 
-// Our validation function for `name` field.
 const nameRequired = value => (value ? undefined : 'Name Required')
 
 class Widgets extends Component {  
@@ -33,28 +32,17 @@ class Widgets extends Component {
 
   submit = (widget) => {
     const { client, widgetCreate, reset } = this.props
-    // call to our widgetCreate action.
     widgetCreate(client, widget)
-    // reset the form upon submit.
     reset()
   }
 
   renderNameInput = ({ input, type, meta: { touched, error } }) => (
     <div>
-      {/* Spread RF's input properties onto our input */}
       <input
         {...input}
         type={type}
       />
-      {/*
-        If the form has been touched AND is in error, show `error`.
-        `error` is the message returned from our validate function above
-        which in this case is `Name Required`.
 
-        `touched` is a live updating property that RF passes in.  It tracks
-        whether or not a field has been "touched" by a user.  This means
-        focused at least once.
-      */}
       {touched && error && (
         <div style={{ color: '#cc7a6f', margin: '-10px 0 15px', fontSize: '0.7rem' }}>
           {error}
@@ -64,11 +52,6 @@ class Widgets extends Component {
     </div>
   )
 	render () {
-		// pull in all needed props for the view
-		// `invalid` is a value that Redux Form injects
-		// that states whether or not our form is valid/invalid.
-		// This is only relevant if we are using the concept of
-		// `validators` in our form.
 		const {
 			handleSubmit,
 			invalid,
@@ -133,14 +116,11 @@ class Widgets extends Component {
 	}
 }
 
-// Pull in both the Client and the Widgets state
 const mapStateToProps = state => ({  
 	client: state.client,
 	widgets: state.widgets,
 })
 
-// Make the Client and Widgets available in the props as well
-// as the widgetCreate() function
 const connected = connect(mapStateToProps, { widgetCreate })(Widgets)  
 const formed = reduxForm({  
 	form: 'widgets',
