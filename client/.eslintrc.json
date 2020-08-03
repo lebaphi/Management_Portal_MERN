@@ -1,0 +1,35 @@
+{
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": ["react"],
+    "rules": {
+      "indent": ["error", "tab"],
+      "linebreak-style": ["error", "unix"],
+      "quotes": ["error", "single"],
+      "semi": ["error", "never"],
+      "no-console": ["error", { "allow": ["warn", "error", "log"] }],
+      "object-curly-spacing": ["error", "always"],
+      "no-multiple-empty-lines": ["error", { "max": 1 }],
+      "nonblock-statement-body-position": ["error", "beside"],
+      "no-multi-spaces": ["error", { "ignoreEOLComments": false } ],
+      "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+      "array-bracket-spacing": ["error", "always"],
+      "computed-property-spacing": ["error", "always"]
+    }
+  }
+  
