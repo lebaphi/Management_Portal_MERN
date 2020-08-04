@@ -1,7 +1,9 @@
 import { ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
+import formidable from 'formidable'
 import userModel from '../models/user'
 import auth from './authCtrl'
+import Utils from '../utils/utils'
 
 const UserCtrl = {
 
@@ -41,18 +43,26 @@ const UserCtrl = {
 		})
 	},
 
-	async login (req, res){
-		const { email, password } = req.body
-		const user = await UserCtrl.getUserByEmail(email)
-		if (!user) return res.status(403).json({ err: 'Invalid username/password' })
-		
-		const match = await bcrypt.compare(password, user.password)
-		if(!match) return res.status(403).json({ err: 'Invalid username/password' })
+	badData (res){
+		return Utils.handleError(res, 401, 'Invalid username/password')
+	},
 
-		req.session.user = user
-		const token = await auth.sign(user)
-		if (!token) return res.status(403)
-		res.status(200).json(token)
+	async login (req, res){
+		const form = formidable.IncomingForm()
+		form.parse(req, async (err, form) => {
+			if (err) return UserCtrl.badData(res)
+			const { email, password } = form
+			const user = await UserCtrl.getUserByEmail(email)
+			if (!user) return UserCtrl.badData(res)
+			
+			const match = await bcrypt.compare(password, user.password)
+			if(!match) return UserCtrl.badData(res)
+
+			req.session.user = user
+			const token = auth.sign(user)
+			if (!token) return UserCtrl.badData(res)
+			res.status(200).json({ statusCode: 200, token, msg: 'success' })
+		})
 	}
 }
 

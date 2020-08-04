@@ -30,7 +30,7 @@
       "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
       "array-bracket-spacing": ["error", "always"],
       "computed-property-spacing": ["error", "always"],
-      "space-before-function-paren": ["error", "always"]
+      "space-before-function-paren": ["error", "never"]
     }
   }
   

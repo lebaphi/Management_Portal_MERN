@@ -1,6 +1,7 @@
 require('dotenv').config()
 import express from 'express'
 import session from 'express-session'
+const FileStore = require('session-file-store')(session)
 const app = express()
 const addRequestId = require('express-request-id')()
 import { join } from 'path'
@@ -24,7 +25,7 @@ app.use(session({
 	name : 'local.session',
 	secret: config.secretKey,
 	resave: true,
-	store: new session.MemoryStore(),
+	store: new FileStore(),
 	saveUninitialized: true
 }))
 

@@ -23,12 +23,14 @@ const AuthCtrl = {
 	isAuthenticated (req, res){
 		const { token } = req.body
 		const user = req.session.user
+		console.log(token)
+		console.log(user)
 		try {
 			const { id, userName: email } = jwt.verify(token, config.secretKey)
 			const isAuth = user._id === id && user.email === email
-			res.status(isAuth ? 200 : 401).json({ result: isAuth })
+			res.status(isAuth ? 200 : 401).json({ isAuth })
 		} catch(err) {
-			res.status(401).json({ err })
+			res.status(401).json({ isAuth: false })
 		}
 	}
 }
