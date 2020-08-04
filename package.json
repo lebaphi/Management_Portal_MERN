@@ -8,8 +8,8 @@
   "homepage": "https://mui-table-3.appspot.com/employee",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r esm index.js ",
-    "server": "nodemon -r esm index.js",
+    "start": "nodemon --ignore './sessions/' r esm index.js ",
+    "server": "nodemon --ignore './sessions/' -r esm index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "fix-code": "prettier-eslint --write 'src/**/*.{js,jsx}' ",

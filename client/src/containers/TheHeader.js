@@ -20,7 +20,7 @@ import {
 	TheHeaderDropdownTasks
 } from './index'
 
-const TheHeader = () => {
+const TheHeader = (props) => {
 
 	return (
 		<CHeader withSubheader>
@@ -42,7 +42,7 @@ const TheHeader = () => {
 				<TheHeaderDropdownNotif/>
 				<TheHeaderDropdownTasks/>
 				<TheHeaderDropdownMssg/>
-				<TheHeaderDropdown/>
+				<TheHeaderDropdown {...props}/>
 			</CHeaderNav>
 
 			<CSubheader className="px-3 justify-content-between">

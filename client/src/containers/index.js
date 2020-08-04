@@ -8,12 +8,12 @@ import TheHeaderDropdownTasks from './TheHeaderDropdownTasks'
 import TheLayout from './TheLayout'
 
 export {
-  TheContent,
-  TheFooter,
-  TheHeader,
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks,
-  TheLayout,
+	TheContent,
+	TheFooter,
+	TheHeader,
+	TheHeaderDropdown,
+	TheHeaderDropdownMssg,
+	TheHeaderDropdownNotif,
+	TheHeaderDropdownTasks,
+	TheLayout,
 }

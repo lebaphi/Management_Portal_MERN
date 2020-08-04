@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+#store
+sessions
+
 # production
 /build
 /client/build
