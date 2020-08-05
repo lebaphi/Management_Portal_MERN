@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import {
 	CButton,
@@ -15,24 +15,30 @@ import {
 	CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import PropTypes from 'prop-types'
+import Utils from '../../../utils/utils'
 
 class Login extends Component {
 
 	handleSubmit = () => {
 		const form = document.getElementById('login-form')
-		const formData = new FormData(form)
+		const formData = Utils.validateAndExtractForm(form, 'email', 'password')
+		if(Utils.isEmpty(formData)) return
+		const {email, password} = formData
+
 		fetch('/api/users/login', {
 			method: 'POST',
-			body: formData
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({email, password})
 		})
 			.then(response => response.json())
 			.then(({statusCode, token}) => {
-        if (statusCode === 200) {
-          localStorage.setItem('token', token)
-          this.props.history.push('dashboard')
-        }
-			})
+				if (statusCode === 200) {
+					localStorage.setItem('token', token)
+					this.props.history.push('dashboard')
+				}
+		})
 	}
 
 	render(){
@@ -53,7 +59,7 @@ class Login extends Component {
 														<CIcon name="cil-user" />
 													</CInputGroupText>
 												</CInputGroupPrepend>
-												<CInput type="email" name="email" placeholder="Username" autoComplete="username" />
+												<CInput type="email" name="email" placeholder="Username" autoComplete="username" required id="email"/>
 											</CInputGroup>
 											<CInputGroup className="mb-4">
 												<CInputGroupPrepend>
@@ -61,7 +67,7 @@ class Login extends Component {
 														<CIcon name="cil-lock-locked" />
 													</CInputGroupText>
 												</CInputGroupPrepend>
-												<CInput type="password" name="password" placeholder="Password" autoComplete="current-password" />
+												<CInput type="password" name="password" placeholder="Password" autoComplete="current-password" required/>
 											</CInputGroup>
 											<CRow>
 												<CCol xs="6">
@@ -78,8 +84,7 @@ class Login extends Component {
 									<CCardBody className="text-center">
 										<div>
 											<h2>Sign up</h2>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+											<p>Description here...</p>
 											<Link to="/register">
 												<CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
 											</Link>
@@ -92,11 +97,7 @@ class Login extends Component {
 				</CContainer>
 			</div>
 		)
-	}
-}
-
-Login.propTypes = {
-	history: PropTypes.any
+		}
 }
 
 export default Login

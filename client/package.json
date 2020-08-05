@@ -35,7 +35,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://192.168.1.60:8080",
+  "proxy": "http://192.168.76.42:8080",
   "eslintConfig": {
     "extends": "react-app"
   },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import { checkAuth } from './checkAuth'
+import Utils from './utils'
 import PropTypes from 'prop-types'
 
 class PrivateRoute extends Component {
@@ -10,7 +10,7 @@ class PrivateRoute extends Component {
 	}
   
 	componentDidMount(){
-		checkAuth().then(({ isAuth }) => {
+		Utils.checkAuth().then(({ isAuth }) => {
 			this.setState({ isAuth })
 		}, () => {
 			this.setState({ isAuth: false })
