@@ -22,16 +22,23 @@ class Register extends Component {
 
   state = {
     signup: false,
-    error: false
+    error: ''
   }
 
   register = () => {
+    this.setState({error : ''})
     const form = document.getElementById('register-form')
     const formData = Utils.validateAndExtractForm(form, 'email', 'password', 'repeatPwd')
     if(Utils.isEmpty(formData)) return
     const { email, password, repeatPwd } = formData
-    this.setState({error: password !== repeatPwd})
-    if (password !== repeatPwd) return
+
+    if (password !== repeatPwd) {
+      this.setState({error: 'Password does not match'})
+      return
+    } else if (password.length < 8) {
+      this.setState({error: 'Password should be more than 8 characters'})
+      return
+    }
 
     fetch('/api/users/signup', {
       method: 'POST',
@@ -41,9 +48,11 @@ class Register extends Component {
       body: JSON.stringify({email, password})
     })
       .then(response => response.json())
-      .then(({ statusCode }) => {
+      .then(({ statusCode, msg }) => {
         if (statusCode === 200) {
           this.setState({signup: true})
+        } else {
+          this.setState({error: msg})
         }
       })
   }
@@ -83,7 +92,7 @@ class Register extends Component {
 										</CInputGroup>
                     {this.state.error && 
                     <CAlert color="danger">
-                      Password does not match!
+                      {this.state.error}
                     </CAlert>}
 										<CButton color="success" block onClick={this.register}>Create Account</CButton>
 										{this.state.signup && 

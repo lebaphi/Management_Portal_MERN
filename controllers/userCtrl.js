@@ -30,8 +30,11 @@ const UserCtrl = {
 		})
 	},
 
-	createUser (req, res){
+	async createUser (req, res){
 		const { email, password } = req.body
+		const user = await UserCtrl.getUserByEmail(email)
+		if (user) return res.status(409).json({ statusCode: 409, msg: 'User already exists' })
+
 		bcrypt.hash(password, 10, function (err, hash) {
 			if (err) return res.status(502).json({ statusCode: 502, msg: 'Unexpected Error' })
 			userModel.create({ _id: new ObjectId(), email, password: hash }, err => {
@@ -43,7 +46,6 @@ const UserCtrl = {
 
 	async login (req, res){
 		const { email, password } = req.body
-		console.log(email, password)
 		const user = await UserCtrl.getUserByEmail(email)
 		if (!user) return res.status(401).json({ statusCode: 401, msg: 'Unauthorized' })
 			
