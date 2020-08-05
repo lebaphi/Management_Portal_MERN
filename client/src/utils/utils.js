@@ -23,17 +23,17 @@ const Utils = {
 				elm.reportValidity()
 				return {}
 			} else if (fields.includes(elm.name)){
-					result[elm.name] = elm.value
+				result[ elm.name ] = elm.value
 			}
 		}
 		return result
 	},
 
 	isEmpty(obj) {
-    for(const key in obj) {
-      if(obj.hasOwnProperty(key)) return false
-    }
-  	return true;
+		for(const key in obj) {
+			if(obj.hasOwnProperty(key)) return false
+		}
+  	return true
 	}
 }
 

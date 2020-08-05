@@ -25,7 +25,7 @@ const App = () => {
 					<PublicRoute restricted={true} component={Login} path="/login" name="Login Page" exact />
 					<PublicRoute restricted={false} component={Register} path="/register" name="Register Page"/>
 					<PublicRoute exact path="/404" name="Page 404" component={Page404}/>
-					<PrivateRoute restricted={false} component={TheLayout} path="/" name="Home" />
+					<PrivateRoute component={TheLayout} path="/" name="Home" />
 					<PrivateRoute component={Dashboard} name="Dashboard page" exact />
 				</Switch>
 			</React.Suspense>
